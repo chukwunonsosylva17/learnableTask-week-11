@@ -92,18 +92,43 @@
  npm start
  ```
 
- The application will be available at `http://localhost:8080/api/notes` ( the PORT specified in .env).
+ The application will be available at `http://localhost:8080/api/notes` ( the PORT specified in .env). <br>
  The API documentation is available at `https://documenter.getpostman.com/view/28027423/2sAYk8tNMp`
  
  ## API Usage Examples
- 
- ### Get All Notes
+
+ ### Create New Note
  
  ```
+ POST /api/notes
+ Content-Type: application/json
+ ``` 
+
+ ```json
+ {
+   "title": "Weekly Tasks",
+   "content": "Complete API documentation and unit tests"
+ }
+ ```
+Response:
+```json
+ {
+   "_id": "67d033b0fda7d104e96bbb7b",
+   "title": "Weekly Tasks",
+   "content": "API documentation, API testing, Unit testing",
+   "createdAt": "2025-03-11T12:59:28.972Z",
+   "updatedAt": "2025-03-11T12:59:28.972Z"
+}
+```
+
+ 
+ ### Get All Notes
+ ```
  GET /api/notes
+ ```
 
  Response: 
- ``` json 
+ ```json 
  {
     "status": "success",
     "results": 4,
@@ -146,7 +171,7 @@
 
 ```
 Get /api/notes/<note-id>
-
+```
 Response:
 ```json
 {
@@ -163,12 +188,11 @@ Response:
 }
 ```
 
-
 ### PUT Update Note By ID
 
 ```
 Put /api/notes/<note-id>
-
+```
 Response:
 ```json
 {
@@ -183,6 +207,7 @@ Response:
         }
     }
 }
+```
 
  ### Delete Note
  
