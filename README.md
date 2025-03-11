@@ -14,13 +14,12 @@
  - **Error Handling**: Custom error classes with appropriate HTTP status codes
  - **API Documentation**: Interactive Swagger UI documentation
  - **Input Validation**: Data validation for creating and updating notes
- - **Scalable Architecture**: Organized codebase with separation of concerns
  
  ## API Documentation
  
- The API includes interactive documentation using Swagger UI.
+ The API includes interactive documentation using Postman UI.
  
- - **Access URL**: `http://localhost:5000/api-docs`
+ - **Access URL**: `https://documenter.getpostman.com/view/28027423/2sAYk8tNMp`
  - **Features**:
    - Browse all available endpoints
    - See request/response schemas
@@ -30,7 +29,7 @@
  To access the documentation:
  1. Start the application
  2. Open your browser
- 3. Navigate to `http://localhost:5000/api-docs`
+ 3. Navigate to `https://documenter.getpostman.com/view/28027423/2sAYk8tNMp`
  
  ## API Endpoints
  
@@ -46,7 +45,7 @@
  Each note contains:
  
  - `_id`: Unique identifier (auto-generated)
- - `title`: Note title (required, max 100 characters)
+ - `title`: Note title
  - `content`: Note content (required)
  - `createdAt`: Timestamp of creation (auto-generated)
  - `updatedAt`: Timestamp of last update (auto-generated)
@@ -61,7 +60,7 @@
  
  1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/note-taking-api.git
+    git clone https://github.com/chukwunonsosylva17/learnableTask-week-11.git
     cd note-taking-api
     ```
  
@@ -72,9 +71,8 @@
  
  3. Create a `.env` file in the root directory with the following variables:
     ```
-    PORT=5000
-    MONGO_URI=mongodb://localhost:27017/note-taking-app
-    ```
+    PORT=8080
+    MONGO_URI= mongodb+srv://noscaro212gs:<_dbpassword>@cluster0.lco2g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
     *Note: Update the MONGO_URI as needed for your environment*
  
  ## Running the Application
@@ -95,6 +93,7 @@
  ```
 
  The application will be available at `http://localhost:8080/api/notes` ( the PORT specified in .env).
+ The API documentation is available at `https://documenter.getpostman.com/view/28027423/2sAYk8tNMp`
  
  ## API Usage Examples
  
@@ -102,8 +101,7 @@
  
  ```
  GET /api/notes
- ```
- 
+
  Response: 
  ``` json 
  {
@@ -147,7 +145,7 @@
 ### Get Note By ID
 
 ```
-Get /api/notes/
+Get /api/notes/<note-id>
 
 Response:
 ```json
@@ -169,7 +167,7 @@ Response:
 ### PUT Update Note By ID
 
 ```
-Put /api/notes/
+Put /api/notes/<note-id>
 
 Response:
 ```json
