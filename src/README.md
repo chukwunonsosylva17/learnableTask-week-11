@@ -93,3 +93,145 @@
  npm run build
  npm start
  ```
+
+ The application will be available at `http://localhost:8080/api/notes` ( the PORT specified in .env).
+ 
+ ## API Usage Examples
+ 
+ ### Get All Notes
+ 
+ ```
+ GET /api/notes
+ ```
+ 
+ Response: 
+ ``` json 
+ {
+    "status": "success",
+    "results": 4,
+    "data": {
+        "notes": [
+            {
+                "_id": "67d033bcfda7d104e96bbb7d",
+                "title": "Meeting Notes",
+                "content": "Discuss project timeline and resource allocation",
+                "createdAt": "2025-03-11T12:59:40.691Z",
+                "updatedAt": "2025-03-11T12:59:40.691Z"
+            },
+            {
+                "_id": "67d033b0fda7d104e96bbb7b",
+                "title": "Weekkly Tasks",
+                "content": "API documentation, API testing, Unit testing",
+                "createdAt": "2025-03-11T12:59:28.972Z",
+                "updatedAt": "2025-03-11T12:59:28.972Z"
+            },
+            {
+                "_id": "67d031cefda7d104e96bbb78",
+                "title": "Groceries Shopping",
+                "content": "Tomatoes, Apple, Bread, Vegetable oil",
+                "createdAt": "2025-03-11T12:51:26.889Z",
+                "updatedAt": "2025-03-11T12:51:26.889Z"
+            },
+            {
+                "_id": "67d0253bfda7d104e96bbb69",
+                "title": "First Note",
+                "content": "This is my first note",
+                "createdAt": "2025-03-11T11:57:47.212Z",
+                "updatedAt": "2025-03-11T11:57:47.212Z"
+            }
+        ]
+    }
+}
+```
+
+### Get Note By ID
+
+```
+Get /api/notes/
+
+Response:
+```json
+{
+    "status": "success",
+    "data": {
+        "note": {
+            "_id": "67d0127ffda7d104e96bbb67",
+            "title": "First Note",
+            "content": "This is my first note",
+            "createdAt": "2025-03-11T10:37:52.090Z",
+            "updatedAt": "2025-03-11T10:37:52.090Z"
+        }
+    }
+}
+```
+
+
+### PUT Update Note By ID
+
+```
+Put /api/notes/
+
+Response:
+```json
+{
+    "status": "success",
+    "data": {
+        "note": {
+            "_id": "67d0127ffda7d104e96bbb67",
+            "title": "First Note",
+            "content": "Tomatoes, Apple, Bread, Vegetable oil",
+            "createdAt": "2025-03-11T10:37:52.090Z",
+            "updatedAt": "2025-03-11T12:23:47.586Z"
+        }
+    }
+}
+
+ ### Delete Note
+ 
+ ```
+ DELETE /api/notes/67d0127ffda7d104e96bbb67 
+ ```
+ 
+ Response: Status 204 No Content
+ 
+ ## Error Handling
+ 
+ The API provides clear error messages with appropriate HTTP status codes:
+ 
+ - `400 Bad Request`: Invalid input data
+ - `404 Not Found`: Resource not found
+ - `500 Internal Server Error`: Unexpected server errors
+ 
+ Example error response:
+ ```json
+{
+    "status": "fail",
+    "message": "Note with ID 67d0127ffda7d104e96bbb67 not found"
+}
+ ```
+ 
+ ## Project Structure
+ 
+ ```
+ note-api/
+ ├── src/
+ │   ├── config/
+ │   │   ├── db.ts              // Database connection logics
+ │   ├── controllers/
+ │   │   └── noteController.ts  // Route handler functions
+ │   ├── interfaces/
+ │   │   └── noteInterface.ts   // TypeScript interfaces
+ │   ├── middleware/
+ │   │   └── errorMiddleware.ts // Error handling middleware
+ │   ├── models/
+ │   │   └── noteModel.ts       // Mongoose schema and model
+ │   ├── routes/
+ │   │   └── noteRoutes.ts      // API route definitions
+ │   ├── utils/
+ │   │   └── errorClasses.ts    // Custom error classes
+ │   ├── app.ts                 // Express app setup
+ │   └── server.ts              // Server entry point
+ ├── .env                       // Environment variables
+ ├── tsconfig.json              // TypeScript configuration
+ └── package.json               // Project dependencies
+ ```

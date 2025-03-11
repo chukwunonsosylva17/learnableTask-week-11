@@ -1,7 +1,7 @@
+import dotenv from "dotenv";
 import express, { Application, Request, Response, NextFunction} from "express";
 import cors from "cors";
 import hemelt from "helmet"
-import dotenv from "dotenv";
 import noteRouter from "./routes/noteRoutes";
 import {errorHandler} from "./middleware/errorMiddleware";
 import { NotFoundError } from "./utils/errorClasses";

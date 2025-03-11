@@ -1,11 +1,19 @@
 import mongoose from 'mongoose';
  
- export const connectDB = async (): Promise<void> => {
-   try {
-     const conn = await mongoose.connect(process.env.MONGO_URI!);
-     console.log(`MongoDB Connected: ${conn.connection.host}`);
-   } catch (error) {
-     console.error(`Error connecting to MongoDB: ${error}`);
-     process.exit(1);
-   }
- };
+ export const connectDB = () => {
+  const mongoUri = process.env.MONGO_URI as string;
+  console.debug("sadfghjvgb",mongoUri)
+  if (!mongoUri) {
+    throw new Error("Mongo URI is missing")
+  }
+    console.log("Connecting to DB")
+    mongoose.set('strictQuery', true)
+    mongoose.connect(mongoUri, {
+
+    }).then(() => {
+        console.log("Connected to DB")
+    }).catch((err) => {
+      console.log(err)
+        console.log("Error connecting to DB")
+    });
+    }
