@@ -118,7 +118,7 @@
             },
             {
                 "_id": "67d033b0fda7d104e96bbb7b",
-                "title": "Weekkly Tasks",
+                "title": "Weekly Tasks",
                 "content": "API documentation, API testing, Unit testing",
                 "createdAt": "2025-03-11T12:59:28.972Z",
                 "updatedAt": "2025-03-11T12:59:28.972Z"
