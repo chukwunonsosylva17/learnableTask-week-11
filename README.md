@@ -47,6 +47,7 @@
  - `_id`: Unique identifier (auto-generated)
  - `title`: Note title
  - `content`: Note content (required)
+ - `category`: Note category 
  - `createdAt`: Timestamp of creation (auto-generated)
  - `updatedAt`: Timestamp of last update (auto-generated)
  
@@ -74,6 +75,8 @@
     PORT=8080
     MONGO_URI= mongodb+srv://noscaro212gs:<_dbpassword>@cluster0.lco2g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
     *Note: Update the MONGO_URI as needed for your environment*
+    CORS_ORIGIN=http://localhost:8080
+    NODE_ENV=development
  
  ## Running the Application
  
@@ -92,7 +95,9 @@
  npm start
  ```
 
- The application will be available at `http://localhost:8080/api/notes` ( the PORT specified in .env). <br>
+### NOTE
+
+ The application will be available at `http://localhost:8080` ( the PORT specified in .env). <br>
  The API documentation is available at `https://documenter.getpostman.com/view/28027423/2sAYk8tNMp`
  
  ## API Usage Examples
@@ -236,25 +241,115 @@ Response:
  ## Project Structure
  
  ```
- note-api/
+ learnableTask-week-11/
  ├── src/
- │   ├── config/
- │   │   ├── db.ts              // Database connection logics
- │   ├── controllers/
- │   │   └── noteController.ts  // Route handler functions
- │   ├── interfaces/
- │   │   └── noteInterface.ts   // TypeScript interfaces
- │   ├── middleware/
- │   │   └── errorMiddleware.ts // Error handling middleware
- │   ├── models/
- │   │   └── noteModel.ts       // Mongoose schema and model
- │   ├── routes/
- │   │   └── noteRoutes.ts      // API route definitions
- │   ├── utils/
- │   │   └── errorClasses.ts    // Custom error classes
+ │   ├── config/                        // Database connection logics
+ │   │   ├── db.ts                
+ │   ├── controllers/                  // Route handler functions  
+ │   │   ├── category.controller.ts          
+ │   │   ├── index.controller.ts   
+ │   │   └── note.controller.ts      
+ │   ├── interfaces/                   // TypeScript interfaces
+ │   │   └── noteInterface.ts      
+ │   ├── middleware/                   // Error handling middleware
+ │   │   ├── categoryValidation.middleware.ts 
+ │   │   ├── errorHAndler.middleware.ts
+ │   │   ├── idCategoryValidation.middleware.ts 
+ │   │   ├── logging.middleware.ts
+ │   │   └── noteValidation.middleware.ts      
+ │   ├── models/                    // Mongoose schema and model
+ │   │   ├── category.model.ts     
+ │   │   └── noteModel.ts       
+ │   ├── routes/                      // API route definitions
+ │   │   ├── category.routes.ts 
+ │   │   ├── index.route.ts     
+ │   │   └── note.route.ts
+ │   ├── services/                 // Services handle the business logic and database interactions.
+ │   │   ├── category.service.ts
+ │   │   ├── note.service.ts
+ │   │   └── type.service.ts
+ │   ├── utils/                       // Custom error classes
+ │   │   └── errorHandler.ts   
+ │   ├── validations/                  // validation logics and schemas
+ │   │   ├── category.validation.ts 
+ │   │   ├── note.validation.ts
+ │   │   └── schemas.ts 
  │   ├── app.ts                 // Express app setup
  │   └── server.ts              // Server entry point
  ├── .env                       // Environment variables
  ├── tsconfig.json              // TypeScript configuration
  └── package.json               // Project dependencies
+ ```<br>
+
  ```
+ ##  Adding Category Support
+
+- Updated the `Note` model to include a `categoryId` field
+- Modified the `createNote` and `updateNote` controllers to require `categoryId`
+- Added a new endpoint to retrieve notes by category
+- Implemented CRUD operations for categories
+- Categories accept either an **ObjectId** reference to the `Category` model or a normal object with `name` and `description`
+
+###  Implementing Middleware
+
+- **Validation Middleware:** Ensures all requests contain the required fields before reaching the controllers (`noteValidationMiddleware.ts`)
+- **Logging Middleware:** Logs all incoming requests (`loggerMiddleware.ts`)
+ ``` <br>
+
+```
+
+###  Testing with Postman
+
+#### Notes Endpoints:
+
+- **GET** `/api/notes` - Retrieve all notes
+- **GET** `/api/notes/:id` - Retrieve a specific note
+- **GET** `/api/notes/category/:categoryId` - Retrieve notes by category
+- **POST** `/api/notes` - Create a new note (requires title, content, and categoryId in request body)
+- **PUT** `/api/notes/:id` - Update a note (requires title, content, and categoryId in request body)
+- **DELETE** `/api/notes/:id` - Delete a note
+
+#### Category Endpoints:
+
+- **GET** `/api/categories` - Retrieve all categories
+- **GET** `/api/categories/:id` - Retrieve a specific category by ID
+- **POST** `/api/categories` - Create a new category (requires `name` and `description` in request body)
+- **PUT** `/api/categories/:id` - Update a category (supports partial updates for `name` and `description`)
+- **DELETE** `/api/categories/:id` - Delete a category by ID
+```<br>
+
+```
+## Postman API Structure
+
+ ```
+ - Notes API (Collection)
+  ├── Categories
+  │   └── Create Category [POST]
+  ├── Notes
+  │   ├── Create Note [POST]
+  │   ├── Get All Notes [GET]
+  │   ├── Get Note by ID [GET]
+  │   ├── Update Note [PUT]
+  │   └── Delete Note [DELETE]
+  └── Environments
+      └── Local Development
+``` 
+
+### Published Documentation
+
+```
+
+ Collection Details 
+
+URL for published documentation: https://documenter.getpostman.com/view/28027423/2sAYkBtMp3 <br>
+
+Collection name: Note Taking API <br>
+
+Versions: CURRENT <br>
+
+Environment: env <br>
+
+SEO Title: Note Taking API With Category <br>
+
+Description: My Learnable Task For The Week
+```

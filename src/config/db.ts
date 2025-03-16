@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
- 
+
  export const connectDB = () => {
   const mongoUri = process.env.MONGO_URI as string;
   if (!mongoUri) {

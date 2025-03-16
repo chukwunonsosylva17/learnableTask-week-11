@@ -18,8 +18,8 @@ export class BaseError extends Error {
         }
       }
       
-    export class BadRequestError extends BaseError {
+    export class ValidationError extends BaseError {
         constructor(message: string = 'Bad request') {
           super(message, 400);
         }
-      }
+    }
